@@ -32,7 +32,7 @@ def init_hardware():
                 interval=0.05,
                 filter_size=1,
                 cape_board='CRAMPS',
-                channels='02:%s,03:%s,04:%s,05:%s'
+                channels='04:%s,05:%s,02:%s,03:%s'
                 % (c.find('HBP', 'THERMISTOR', defaultThermistor),
                    c.find('EXTRUDER_0', 'THERMISTOR', defaultThermistor),
                    c.find('EXTRUDER_1', 'THERMISTOR', defaultThermistor),
