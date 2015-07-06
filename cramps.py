@@ -26,7 +26,7 @@ def init_hardware():
               prucode=prubin, halname='hpg')
 
     # Python user-mode HAL module to read ADC value and generate a thermostat output for PWM
-    defaultThermistor = 'semitec_103GT_2'
+    defaultThermistor = 'epcos_B57560G104F'
     hal.loadusr('hal_temp_bbb',
                 name='temp',
                 interval=0.05,

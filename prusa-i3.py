@@ -1,4 +1,4 @@
-# HAL file for BeagleBone + TCT paralell port cape with 5 steppers and 3D printer board
+# HAL file for BeagleBone + Cramps cape with 5 steppers and 3D printer board
 import os
 
 from machinekit import rtapi as rt
