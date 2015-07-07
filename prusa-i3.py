@@ -20,8 +20,12 @@ motion.setup_motion()
 hardware.init_hardware()
 storage.init_storage('storage.ini')
 
+# Gantry component for Z Axis
+base.init_gantry(axisIndex=2)
+
 # reading functions
 hardware.hardware_read()
+base.gantry_read(gantryAxis=2, thread='servo-thread')
 hal.addf('motion-command-handler', 'servo-thread')
 
 numFans = c.find('FDM', 'NUM_FANS')
@@ -36,9 +40,12 @@ base.setup_stepper(section='AXIS_0', axisIndex=0, stepgenIndex=0)
 base.setup_stepper(section='AXIS_1', axisIndex=1, stepgenIndex=1)
 # Z [2] Axis
 base.setup_stepper(section='AXIS_2', axisIndex=2, stepgenIndex=2)
+              thread='servo-thread', gantry=True, gantryJoint=0)
+base.setup_stepper(section='AXIS_2', axisIndex=2, stepgenIndex=3,
+            gantry=True, gantryJoint=1)
 # Extruder, velocity controlled
 for i in range(0, numExtruders):
-    base.setup_stepper(section='EXTRUDER_%i' % i, stepgenIndex=3,
+    base.setup_stepper(section='EXTRUDER_%i' % i, stepgenIndex=4,
                        velocitySignal='ve-extrude-vel')
 
 # Extruder Multiplexer
@@ -82,6 +89,7 @@ hardware.setup_hardware(thread='servo-thread')
 
 # write out functions
 hal.addf('motion-controller', 'servo-thread')
+base.gantry_write(gantryAxis=2, thread='servo-thread')
 hardware.hardware_write()
 
 # Storage
