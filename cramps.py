@@ -76,6 +76,8 @@ def setup_hardware(thread):
     hal.Pin('bb_gpio.p8.in-09').link('limit-1-max')    # Y
 #    hal.Pin('bb_gpio.p9.in-13').link('limit-2-home')   # Z
 #    hal.Pin('bb_gpio.p9.in-11').link('limit-2-max')    # Z
+    hal.Pin('bb_gpio.p9.in-13').link('limit-2-0-home')  # ZR
+    hal.Pin('bb_gpio.p9.in-11').link('limit-2-1-home')  # ZL
     # probe ...
 
     # Adjust as needed for your switch polarity
