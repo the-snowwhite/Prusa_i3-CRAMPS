@@ -99,12 +99,12 @@ def setup_hardware(thread):
     hal.Pin('hpg.stepgen.01.dirpin').set(814)
     hal.Pin('hpg.stepgen.02.steppin').set(819)
     hal.Pin('hpg.stepgen.02.dirpin').set(818)
-    hal.Pin('hpg.stepgen.03.steppin').set(916)
-    hal.Pin('hpg.stepgen.03.dirpin').set(912)
-    hal.Pin('hpg.stepgen.04.steppin').set(917)
-    hal.Pin('hpg.stepgen.04.dirpin').set(918)
-    hal.Pin('hpg.stepgen.05.steppin').set(924)
-    hal.Pin('hpg.stepgen.05.dirpin').set(926)
+    hal.Pin('hpg.stepgen.03.steppin').set(924)
+    hal.Pin('hpg.stepgen.03.dirpin').set(926)
+    hal.Pin('hpg.stepgen.04.steppin').set(916)
+    hal.Pin('hpg.stepgen.04.dirpin').set(912)
+    hal.Pin('hpg.stepgen.05.steppin').set(917)
+    hal.Pin('hpg.stepgen.05.dirpin').set(918)
 
     # machine power
     hal.Pin('bb_gpio.p9.out-23').link('emcmot-0-enable')
