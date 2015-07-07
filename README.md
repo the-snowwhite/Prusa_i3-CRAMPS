@@ -13,3 +13,6 @@ Prusa_i3 CRAMPS configuration for Machinekit
 
 With individual Left/Right Z-axis offset-adjustment in machinekit-client
 
+
+
+![](./images/Prusa-i3_dev.jpg)
