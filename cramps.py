@@ -66,6 +66,11 @@ def setup_hardware(thread):
         hal.Pin('hpg.pwmgen.00.out.%02i.enable' % (n + 4)).link('f%i-pwm-enable' % n)
         hal.Pin('hpg.pwmgen.00.out.%02i.value' % (n + 4)).link('f%i-pwm' % n)
         hal.Signal('f%i-pwm-enable' % n).set(True)
+    # configure exps
+    for n in range(0, 2):
+        hal.Pin('hpg.pwmgen.00.out-%02i.enable' % (n + 9)).link('exp%i-pwm-enable' % n)
+        hal.Pin('hpg.pwmgen.00.out-%02i.value' % (n + 9)).link('exp%i-pwm' % n)
+        hal.Signal('exp%i-pwm' % n).set(1.0)
     # configure leds
     # none
 
@@ -126,3 +131,7 @@ def setup_hardware(thread):
     # link emcmot.xx.enable to stepper driver enable signals
     hal.Pin('bb_gpio.p9.out-14').link('emcmot-0-enable')
     hal.Pin('bb_gpio.p9.out-14.invert').set(True)
+
+def setup_exp(name):
+    hal.newsig('%s-pwm' % name, hal.HAL_FLOAT, init=0.0)
+    hal.newsig('%s-enable' % name, hal.HAL_BIT, init=False)
