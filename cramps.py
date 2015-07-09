@@ -62,12 +62,12 @@ def setup_hardware(thread):
         hal.Pin('hpg.pwmgen.00.out.%02i.enable' % (n + 1)).set(True)
         hal.Pin('hpg.pwmgen.00.out.%02i.value' % (n + 1)).link('e%i-temp-pwm' % n)
     # configure fans
-    for n in range(0, 2):
+    for n in range(0, 1):
         hal.Pin('hpg.pwmgen.00.out.%02i.enable' % (n + 4)).link('f%i-pwm-enable' % n)
         hal.Pin('hpg.pwmgen.00.out.%02i.value' % (n + 4)).link('f%i-pwm' % n)
         hal.Signal('f%i-pwm-enable' % n).set(True)
     # configure exps
-    for n in range(0, 2):
+    for n in range(0, 1):
         hal.Pin('hpg.pwmgen.00.out.%02i.enable' % (n + 5)).link('exp%i-pwm-enable' % n)
         hal.Pin('hpg.pwmgen.00.out.%02i.value' % (n + 5)).link('exp%i-pwm' % n)
         hal.Signal('exp%i-pwm' % n).set(1.0)
