@@ -11,6 +11,9 @@ Prusa_i3 CRAMPS velocity based extraction configuration for Machinekit
     Bed thermistor --> Therm input 0
     E0 thermistor  --> Therm input 1
 
+    Extruder body fan <-- FET6
+    Cooling fan       <-- FET5
+
 With individual Left/Right Z-axis offset-adjustment in machinekit-client
 
 
