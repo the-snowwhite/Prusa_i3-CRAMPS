@@ -69,7 +69,7 @@ base.create_temperature_control(name='hbp', section='HBP',
 for i in range(0, numExtruders):
     base.create_temperature_control(name='e%i' % i, section='EXTRUDER_%i' % i,
                                     coolingFan='f%i' % i,
-                                    hardwareOkSignal='temp-hw-ok',
+                                    hardwareOkSignal='temp-hw-ok',hotendFan='f%i' % (i+1),
                                     thread='servo-thread')
 
 # LEDs
