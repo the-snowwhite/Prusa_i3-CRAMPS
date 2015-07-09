@@ -68,8 +68,8 @@ def setup_hardware(thread):
         hal.Signal('f%i-pwm-enable' % n).set(True)
     # configure exps
     for n in range(0, 2):
-        hal.Pin('hpg.pwmgen.00.out-%02i.enable' % (n + 9)).link('exp%i-pwm-enable' % n)
-        hal.Pin('hpg.pwmgen.00.out-%02i.value' % (n + 9)).link('exp%i-pwm' % n)
+        hal.Pin('hpg.pwmgen.00.out-%02i.enable' % (n + 5)).link('exp%i-pwm-enable' % n)
+        hal.Pin('hpg.pwmgen.00.out-%02i.value' % (n + 5)).link('exp%i-pwm' % n)
         hal.Signal('exp%i-pwm' % n).set(1.0)
     # configure leds
     # none
