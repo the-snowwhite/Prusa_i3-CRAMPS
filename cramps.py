@@ -67,14 +67,11 @@ def setup_hardware(thread):
         hal.Pin('hpg.pwmgen.00.out.%02i.value' % (n + 4)).link('f%i-pwm' % n)
         hal.Signal('f%i-pwm-enable' % n).set(True)
     # configure hotend cooling fan
-    hal.Pin('hpg.pwmgen.00.out.05.enable').link('exp0-pwm-enable')
-    hal.Pin('hpg.pwmgen.00.out.05.value').set(1.0)
-    hal.Pin('hpg.pwmgen.00.out.05.value').link('exp0-pwm')
+    for n in range(0, 1):
+        hal.Pin('hpg.pwmgen.00.out.%02i.enable' % (n + 5)).link('exp%i-pwm-enable' % n)
+        hal.Pin('hpg.pwmgen.00.out.%02i.value' % (n + 5)).link('exp%i-pwm' % n)
+        hal.Signal('f%i-pwm-enable' % n).set(True)
     # configure exps
-#    for n in range(0, 1):
-#        hal.Pin('hpg.pwmgen.00.out.%02i.enable' % (n + 5)).link('exp%i-pwm-enable' % n)
-#        hal.Pin('hpg.pwmgen.00.out.%02i.value' % (n + 5)).link('exp%i-pwm' % n)
-#        hal.Signal('f%i-pwm-enable' % n).set(True)
     # configure leds
     # none
 
