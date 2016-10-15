@@ -31,6 +31,7 @@ hal.addf('motion-command-handler', 'servo-thread')
 numFans = c.find('FDM', 'NUM_FANS')
 numExtruders = c.find('FDM', 'NUM_EXTRUDERS')
 numLights = c.find('FDM', 'NUM_LIGHTS')
+hasHbp = c.find('FDM', 'HAS_HBP')
 
 # Axis-of-motion Specific Configs (not the GUI)
 ve.velocity_extrusion(extruders=numExtruders, thread='servo-thread')
@@ -66,7 +67,8 @@ for i in range(0, numExtruders):
     hardware.setup_exp('exp%i' % i)
 
 # Temperature Signals
-base.create_temperature_control(name='hbp', section='HBP',
+if hasHbp:
+    base.create_temperature_control(name='hbp', section='HBP',
                                 hardwareOkSignal='temp-hw-ok',
                                 thread='servo-thread')
 for i in range(0, numExtruders):
