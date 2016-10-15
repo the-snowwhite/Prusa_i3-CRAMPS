@@ -3,6 +3,7 @@ Prusa_i3 CRAMPS velocity based extraction configuration for Machinekit
 
 3D printer configuration using Machinekits Python API for my Prusa-i3
 ( Originated from:  https://github.com/strahlex/MendelMax-CRAMPS )
+( Updated with Rostock from:  https://github.com/machinekoder/Rostock-CRAMPS )
 
     Uses gantry control on Z-axis
     Gantry Right --> Y stepdriver  (z-min(<) limit-switch input)

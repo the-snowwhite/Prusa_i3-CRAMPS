@@ -30,7 +30,7 @@ try:
         launcher.start_process('mklauncher .')
 
     launcher.start_process("configserver -n Prusa-i3 ~/Machineface")
-    launcher.start_process('machinekit CRAMPS.ini')
+    launcher.start_process('machinekit prusa-i3.ini')
     while True:
         launcher.check_processes()
         time.sleep(1)
