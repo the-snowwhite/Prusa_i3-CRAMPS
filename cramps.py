@@ -66,20 +66,20 @@ def setup_hardware(thread):
         hal.Pin('hpg.pwmgen.00.out.%02i.enable' % (n + 4)).link('f%i-pwm-enable' % n)
         hal.Pin('hpg.pwmgen.00.out.%02i.value' % (n + 4)).link('f%i-pwm' % n)
         hal.Signal('f%i-pwm-enable' % n).set(True)
+
     # configure hotend cooling fan
     for n in range(0, 1):
         hal.Pin('hpg.pwmgen.00.out.%02i.enable' % (n + 5)).link('exp%i-pwm-enable' % n)
         hal.Pin('hpg.pwmgen.00.out.%02i.value' % (n + 5)).link('exp%i-pwm' % n)
         hal.Signal('f%i-pwm-enable' % n).set(True)
-    # configure exps
     # configure leds
     # none
 
     # GPIO
     hal.Pin('bb_gpio.p8.in-08').link('limit-0-home')   # X
-    hal.Pin('bb_gpio.p8.in-07').link('limit-0-max')    # X
+#    hal.Pin('bb_gpio.p8.in-07').link('limit-0-max')    # X
     hal.Pin('bb_gpio.p8.in-10').link('limit-1-home')   # Y
-    hal.Pin('bb_gpio.p8.in-09').link('limit-1-max')    # Y
+#    hal.Pin('bb_gpio.p8.in-09').link('limit-1-max')    # Y
 #    hal.Pin('bb_gpio.p9.in-13').link('limit-2-home')   # Z
 #    hal.Pin('bb_gpio.p9.in-11').link('limit-2-max')    # Z
     hal.Pin('bb_gpio.p9.in-13').link('limit-2-0-home')  # ZR
@@ -135,4 +135,4 @@ def setup_hardware(thread):
 
 def setup_exp(name):
     hal.newsig('%s-pwm' % name, hal.HAL_FLOAT, init=0.0)
-    hal.newsig('%s-enable' % name, hal.HAL_BIT, init=False)
+    hal.newsig('%s-pwm-enable' % name, hal.HAL_BIT, init=False)
