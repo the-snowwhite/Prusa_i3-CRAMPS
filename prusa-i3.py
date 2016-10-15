@@ -27,7 +27,7 @@ base.init_gantry(axisIndex=2)
 hardware.hardware_read()
 base.gantry_read(gantryAxis=2, thread='servo-thread')
 hal.addf('motion-command-handler', 'servo-thread')
-hal.addf('motion-controller', 'servo-thread')
+#hal.addf('motion-controller', 'servo-thread')
 
 numFans = c.find('FDM', 'NUM_FANS')
 numExtruders = c.find('FDM', 'NUM_EXTRUDERS')
