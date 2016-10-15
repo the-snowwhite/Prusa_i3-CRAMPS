@@ -5,10 +5,10 @@ from machinekit import rtapi as rt
 from machinekit import hal
 from machinekit import config as c
 
-from config import velocity_extrusion as ve
-from config import base
-from config import storage
-from config import motion
+from fdm.config import velocity_extrusion as ve
+from fdm.config import base
+from fdm.config import storage
+from fdm.config import motion
 import cramps as hardware
 
 # initialize the RTAPI command client
@@ -16,7 +16,7 @@ rt.init_RTAPI()
 # loads the ini file passed by linuxcnc
 c.load_ini(os.environ['INI_FILE_NAME'])
 
-motion.setup_motion()
+motion.setup_motion('lineardeltakins')
 hardware.init_hardware()
 storage.init_storage('storage.ini')
 
@@ -27,17 +27,19 @@ base.init_gantry(axisIndex=2)
 hardware.hardware_read()
 base.gantry_read(gantryAxis=2, thread='servo-thread')
 hal.addf('motion-command-handler', 'servo-thread')
+hal.addf('motion-controller', 'servo-thread')
 
 numFans = c.find('FDM', 'NUM_FANS')
 numExtruders = c.find('FDM', 'NUM_EXTRUDERS')
 numLights = c.find('FDM', 'NUM_LIGHTS')
+hasHbp = c.find('FDM', 'HAS_HBP')
 
 # Axis-of-motion Specific Configs (not the GUI)
 ve.velocity_extrusion(extruders=numExtruders, thread='servo-thread')
 # X [0] Axis
-base.setup_stepper(section='AXIS_0', axisIndex=0, stepgenIndex=0)
+base.setup_stepper(section='AXIS_0', axisIndex=0, stepgenIndex=0, thread='servo-thread')
 # Y [1] Axis
-base.setup_stepper(section='AXIS_1', axisIndex=1, stepgenIndex=1)
+base.setup_stepper(section='AXIS_1', axisIndex=1, stepgenIndex=1, thread='servo-thread')
 # Z [2] Axis
 base.setup_stepper(section='AXIS_2', axisIndex=2, stepgenIndex=2,
               thread='servo-thread', gantry=True, gantryJoint=0)
@@ -66,13 +68,16 @@ for i in range(0, numExtruders):
     hardware.setup_exp('exp%i' % i)
 
 # Temperature Signals
-base.create_temperature_control(name='hbp', section='HBP',
-                                hardwareOkSignal='temp-hw-ok',
-                                thread='servo-thread')
+if hasHbp:
+    base.create_temperature_control(name='hbp', section='HBP',
+                                    hardwareOkSignal='temp-hw-ok',
+                                    thread='servo-thread')
 for i in range(0, numExtruders):
+    hardware.setup_exp('exp%i' % i)
     base.create_temperature_control(name='e%i' % i, section='EXTRUDER_%i' % i,
                                     coolingFan='f%i' % i,
-                                    hardwareOkSignal='temp-hw-ok',hotendFan='exp%i' % i,
+                                    hotendFan='exp%i' % i,
+                                    hardwareOkSignal='temp-hw-ok',
                                     thread='servo-thread')
 
 # LEDs
@@ -95,7 +100,7 @@ hal.addf('motion-controller', 'servo-thread')
 base.gantry_write(gantryAxis=2, thread='servo-thread')
 hardware.hardware_write()
 
-# Storage
+# read storage.ini
 storage.read_storage()
 
 # start haltalk server after everything is initialized
