@@ -42,7 +42,7 @@ base.setup_stepper(section='AXIS_0', axisIndex=0, stepgenIndex=0, thread='servo-
 base.setup_stepper(section='AXIS_1', axisIndex=1, stepgenIndex=1, thread='servo-thread')
 # Z [2] Axis
 base.setup_stepper(section='AXIS_2', axisIndex=2, stepgenIndex=2,
-              thread='servo-thread', gantry=True, gantryJoint=0, thread='servo-thread')
+              gantry=True, gantryJoint=0, thread='servo-thread')
 base.setup_stepper(section='AXIS_2', axisIndex=2, stepgenIndex=3,
             gantry=True, gantryJoint=1, thread='servo-thread')
 # Extruder, velocity controlled
